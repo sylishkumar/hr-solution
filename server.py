@@ -104,6 +104,15 @@ async def serve_showcase():
         return FileResponse(showcase_file)
     raise HTTPException(status_code=404, detail="Showcase file not found.")
 
+@app.get("/agent-showcase")
+@app.get("/hrsolution-showcase")
+async def serve_hrsolution_showcase():
+    hr_showcase_file = os.path.join(os.path.dirname(__file__), "hr_solution_agent_showcase.html")
+    if os.path.exists(hr_showcase_file):
+        return FileResponse(hr_showcase_file)
+    raise HTTPException(status_code=404, detail="HR Solution Showcase file not found.")
+
+
 if __name__ == "__main__":
     import uvicorn
     logger.info("Starting FastAPI Web UI server on http://0.0.0.0:8000")
