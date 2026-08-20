@@ -5,8 +5,57 @@ document.addEventListener("DOMContentLoaded", () => {
   const employeeSelect = document.getElementById("employeeSelect");
   const evalBadge = document.getElementById("evalBadge");
   const suggestedPills = document.querySelectorAll(".suggested-pill");
+  const sidebar = document.getElementById("sidebar");
+  const sidebarToggle = document.getElementById("sidebarToggle");
+  const newChatBtn = document.getElementById("newChatBtn");
 
   let currentEmployeeId = "EMP1024";
+
+  // Sidebar Toggle
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+    });
+  }
+
+  // New Chat Clear Action
+  if (newChatBtn) {
+    newChatBtn.addEventListener("click", () => {
+      chatMessages.innerHTML = `
+        <div class="message-row bot claude-welcome">
+          <div class="claude-avatar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+            </svg>
+          </div>
+          <div class="message-content">
+            <div class="welcome-heading">How can Claude help you today?</div>
+            <div class="bubble">Hello! Session reset. Ask me anything about company policy, vacation balances, time-off requests, or IT support tickets.</div>
+            <div class="meta-info">
+              <span class="badge badge-agent">RootOrchestrator</span>
+              <span class="badge badge-status">Ready</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  // Auto-resize Textarea
+  if (userInput) {
+    userInput.addEventListener("input", () => {
+      userInput.style.height = "auto";
+      userInput.style.height = Math.min(userInput.scrollHeight, 160) + "px";
+    });
+
+    // Enter to Submit, Shift+Enter for newline
+    userInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.dispatchEvent(new Event("submit"));
+      }
+    });
+  }
 
   // 1. Fetch Employees
   fetch("/api/employees")
@@ -35,10 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const metrics = data.summary_metrics || {};
       const passRate = metrics.pass_rate_percentage || 100.0;
       const totalCases = metrics.total_test_cases || 502;
-      evalBadge.textContent = `✓ Evals: ${passRate}% Pass (${totalCases} Golden Tests)`;
+      evalBadge.innerHTML = `✓ Evals: ${passRate}% Pass (${totalCases} Tests)`;
     })
     .catch((err) => {
-      evalBadge.textContent = `✓ Evals: 100.0% Pass (502 Tests)`;
+      evalBadge.innerHTML = `✓ Evals: 100.0% Pass (502 Tests)`;
     });
 
   // 3. Handle Form Submit
@@ -49,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     appendUserMessage(text);
     userInput.value = "";
+    userInput.style.height = "auto";
     sendTurnToBackend({ prompt: text, employee_id: currentEmployeeId });
   });
 
@@ -94,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let metaBadges = "";
     if (res.agent) {
-      metaBadges += `<span class="badge badge-agent">${res.agent}</span>`;
+      metaBadges += `<span class="badge badge-agent">${escapeHtml(res.agent)}</span>`;
     }
     if (res.groundingScore !== undefined && res.groundingScore !== null) {
       const isValid = res.groundingScore >= 0.85;
@@ -107,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (res.status === "HITL_REQUIRED") {
       bodyContent += `
         <div class="hitl-card">
-          <h4>⚠️ Human-in-the-Loop Action Confirmation</h4>
+          <h4>⚠️ Action Confirmation Required</h4>
           <div class="hitl-summary">${escapeHtml(res.card_summary || "Please confirm executing this action.")}</div>
           <div class="hitl-actions">
             <button class="btn-confirm" id="btnConfirmAction">Confirm & Submit</button>
@@ -118,8 +168,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     row.innerHTML = `
-      <div class="bubble">${bodyContent}</div>
-      <div class="meta-info">${metaBadges}<span>Status: ${res.status || 'OK'}</span></div>
+      <div class="claude-avatar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+        </svg>
+      </div>
+      <div class="message-content">
+        <div class="bubble">${bodyContent}</div>
+        <div class="meta-info">${metaBadges}<span class="badge badge-status">Status: ${res.status || 'OK'}</span></div>
+      </div>
     `;
 
     chatMessages.appendChild(row);
@@ -162,7 +219,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const row = document.createElement("div");
     row.id = "typingIndicator";
     row.className = "message-row bot";
-    row.innerHTML = `<div class="bubble" style="color: #5f6368; font-style: italic;">Assistant is thinking...</div>`;
+    row.innerHTML = `
+      <div class="claude-avatar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+        </svg>
+      </div>
+      <div class="message-content">
+        <div class="bubble" style="color: var(--text-light); font-style: italic;">Claude is thinking...</div>
+      </div>
+    `;
     chatMessages.appendChild(row);
     scrollToBottom();
   }
@@ -175,7 +241,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function appendSystemMessage(msg) {
     const row = document.createElement("div");
     row.className = "message-row bot";
-    row.innerHTML = `<div class="bubble" style="background: #f1f3f4; color: #3c4043; font-size: 12px; font-style: italic;">${escapeHtml(msg)}</div>`;
+    row.innerHTML = `
+      <div class="claude-avatar" style="background-color: #8e8a80;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="10"/>
+        </svg>
+      </div>
+      <div class="message-content">
+        <div class="bubble" style="font-size: 13px; color: var(--text-muted); font-style: italic;">${escapeHtml(msg)}</div>
+      </div>
+    `;
     chatMessages.appendChild(row);
     scrollToBottom();
   }

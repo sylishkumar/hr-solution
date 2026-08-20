@@ -3,55 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise HR Agentic Assistant</title>
+  <title>Enterprise HR Assistant - Claude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <div class="app-container">
-    <!-- Header -->
-    <header class="app-header">
-      <div class="header-title">
-        <span class="logo-badge">HR AGENTIC</span>
-        <h1>Enterprise Assistant Mesh</h1>
-      </div>
-      <div class="header-controls">
-        <div class="persona-selector">
-          <label for="employeeSelect">Employee:</label>
-          <select id="employeeSelect" class="persona-select">
-            <option value="EMP1024">Aish Prabhat (EMP1024)</option>
-            <option value="EMP2048">Jane Doe (EMP2048)</option>
-          </select>
+  <div class="claude-app">
+    <!-- Sidebar -->
+    <aside class="claude-sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <div class="claude-logo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+            </svg>
+          </div>
+          <span class="brand-name">Claude HR</span>
         </div>
-        <div id="evalBadge" class="eval-badge">✓ Evals: Loading...</div>
+        <button class="new-chat-btn" id="newChatBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New chat
+        </button>
       </div>
-    </header>
 
-    <!-- Chat Messages Container -->
-    <main id="chatMessages" class="chat-body">
-      <div class="message-row bot">
-        <div class="bubble">Hello! I am your Enterprise HR Agentic Assistant. How can I help you today with corporate policies, leave balances, or IT support tickets?</div>
-        <div class="meta-info">
-          <span class="badge badge-agent">RootOrchestrator</span>
-          <span>Status: READY</span>
+      <div class="sidebar-section">
+        <div class="section-label">Recents</div>
+        <div class="recent-list">
+          <div class="recent-item active">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            HR Policy & Service Request
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="persona-card">
+          <div class="persona-avatar">AP</div>
+          <div class="persona-info">
+            <label for="employeeSelect" class="persona-label">Active Persona</label>
+            <select id="employeeSelect" class="persona-select">
+              <option value="EMP1024">Aish Prabhat (EMP1024)</option>
+              <option value="EMP2048">Jane Doe (EMP2048)</option>
+            </select>
+          </div>
+        </div>
+        <div id="evalBadge" class="eval-badge">
+          ✓ Evals: Loading...
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="claude-main">
+      <!-- Top Bar Header -->
+      <header class="claude-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggle" title="Toggle Sidebar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="model-selector">
+            <span class="model-name">Claude 3.5 Sonnet</span>
+            <span class="mesh-badge">Enterprise Mesh</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <span class="org-tag">Altostrat HR & ITSM Mesh</span>
+        </div>
+      </header>
+
+      <!-- Chat Canvas -->
+      <div class="chat-canvas">
+        <div id="chatMessages" class="chat-messages-container">
+          <!-- Welcome Message -->
+          <div class="message-row bot claude-welcome">
+            <div class="claude-avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+              </svg>
+            </div>
+            <div class="message-content">
+              <div class="welcome-heading">How can Claude help you today?</div>
+              <div class="bubble">Hello! I am your Enterprise HR & IT Assistant powered by the Altostrat Agentic Mesh. Ask me about company policies, vacation balances, time-off bookings, or raising IT support tickets.</div>
+              <div class="meta-info">
+                <span class="badge badge-agent">RootOrchestrator</span>
+                <span class="badge badge-status">Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Dock Area -->
+        <div class="input-dock">
+          <!-- Suggested Pills -->
+          <div class="suggested-section">
+            <button class="suggested-pill" data-prompt="how much leave do i have">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              How much leave do I have?
+            </button>
+            <button class="suggested-pill" data-prompt="i have an issue with my laptop, can you raise a P1 ticket and tell me what is the expected response time?">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Raise a P1 ticket & check SLA
+            </button>
+            <button class="suggested-pill" data-prompt="What is the company policy on home office monitors?">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Home office monitor policy
+            </button>
+            <button class="suggested-pill" data-prompt="Update my home address">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Update home address
+            </button>
+          </div>
+
+          <!-- Main Input Box -->
+          <form id="chatForm" class="claude-input-card">
+            <textarea id="userInput" class="chat-input" rows="1" placeholder="Reply to Claude..." autocomplete="off"></textarea>
+            <div class="input-actions">
+              <div class="input-hint">Press Shift+Enter for new line</div>
+              <button type="submit" class="send-btn" title="Send message">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+              </button>
+            </div>
+          </form>
+          <div class="footer-disclaimer">Claude Enterprise Mesh grounded in internal Altostrat policies and SaaS APIs.</div>
         </div>
       </div>
     </main>
-
-    <!-- Suggested Actions -->
-    <div class="suggested-section">
-      <button class="suggested-pill" data-prompt="how much leave do i have">How much leave do I have?</button>
-      <button class="suggested-pill" data-prompt="can you raise a service ticket for my laptop">Raise a service ticket for my laptop</button>
-      <button class="suggested-pill" data-prompt="What is the company policy on home office monitors?">What is the policy on home office monitors?</button>
-      <button class="suggested-pill" data-prompt="Update my home address">Update my home address</button>
-    </div>
-
-    <!-- Input Footer -->
-    <footer class="chat-footer">
-      <form id="chatForm" class="input-form">
-        <input type="text" id="userInput" class="chat-input" placeholder="Type your HR or IT request..." autocomplete="off">
-        <button type="submit" class="send-btn">Send</button>
-      </form>
-    </footer>
   </div>
 
   <script src="/static/app.js"></script>
