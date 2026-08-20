@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (newChatBtn) {
     newChatBtn.addEventListener("click", () => {
       chatMessages.innerHTML = `
-        <div class="message-row bot claude-welcome">
-          <div class="claude-avatar">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+        <div class="message-row bot gemini-welcome">
+          <div class="gemini-avatar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C12 7.52285 7.52285 12 2 12C7.52285 12 12 16.4771 12 22C12 16.4771 16.4771 12 22 12C16.4771 12 12 7.52285 12 2Z" fill="#ffffff"/>
             </svg>
           </div>
           <div class="message-content">
-            <div class="welcome-heading">How can Claude help you today?</div>
+            <div class="welcome-heading">How can Gemini help you today?</div>
             <div class="bubble">Hello! Session reset. Ask me anything about company policy, vacation balances, time-off requests, or IT support tickets.</div>
             <div class="meta-info">
               <span class="badge badge-agent">RootOrchestrator</span>
@@ -168,9 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     row.innerHTML = `
-      <div class="claude-avatar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+      <div class="gemini-avatar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C12 7.52285 7.52285 12 2 12C7.52285 12 12 16.4771 12 22C12 16.4771 16.4771 12 22 12C16.4771 12 12 7.52285 12 2Z" fill="#ffffff"/>
         </svg>
       </div>
       <div class="message-content">
@@ -220,13 +220,13 @@ document.addEventListener("DOMContentLoaded", () => {
     row.id = "typingIndicator";
     row.className = "message-row bot";
     row.innerHTML = `
-      <div class="claude-avatar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L14.8 8.6L22 9.2L16.5 13.8L18.2 21L12 17.2L5.8 21L7.5 13.8L2 9.2L9.2 8.6L12 2Z"/>
+      <div class="gemini-avatar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C12 7.52285 7.52285 12 2 12C7.52285 12 12 16.4771 12 22C12 16.4771 16.4771 12 22 12C16.4771 12 12 7.52285 12 2Z" fill="#ffffff"/>
         </svg>
       </div>
       <div class="message-content">
-        <div class="bubble" style="color: var(--text-light); font-style: italic;">Claude is thinking...</div>
+        <div class="bubble" style="color: var(--text-light); font-style: italic;">Gemini is thinking...</div>
       </div>
     `;
     chatMessages.appendChild(row);
@@ -242,9 +242,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const row = document.createElement("div");
     row.className = "message-row bot";
     row.innerHTML = `
-      <div class="claude-avatar" style="background-color: #8e8a80;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <circle cx="12" cy="12" r="10"/>
+      <div class="gemini-avatar" style="background: #747775;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#ffffff"/>
         </svg>
       </div>
       <div class="message-content">

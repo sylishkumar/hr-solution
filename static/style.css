@@ -1,39 +1,43 @@
 /* ==========================================================================
-   Claude Desktop Official Theme Color System
+   Google Gemini AI Official Design System
    ========================================================================== */
 
 :root {
-  /* Claude Desktop Palette */
-  --claude-bg: #f7f5f0;
-  --claude-sidebar-bg: #eae7dc;
-  --claude-sidebar-border: #dcd8cb;
-  --claude-card-bg: #ffffff;
-  --claude-card-border: #e2ded4;
+  /* Google Gemini Palette */
+  --gemini-bg: #f8fafd;
+  --gemini-sidebar-bg: #ffffff;
+  --gemini-sidebar-border: #e8eaed;
+  --gemini-card-bg: #ffffff;
+  --gemini-card-border: #e0e3e7;
   
-  --claude-accent: #d97757;             /* Official Claude Terracotta Orange */
-  --claude-accent-hover: #c46445;
-  --claude-accent-light: #f5e6df;
-  --claude-accent-glow: rgba(217, 119, 87, 0.2);
+  /* Gemini Multi-color Brand Gradient & Accents */
+  --gemini-blue: #1a73e8;
+  --gemini-blue-hover: #1557b0;
+  --gemini-blue-light: #e8f0fe;
+  --gemini-gradient: linear-gradient(135deg, #4285f4 0%, #9b51e0 50%, #e91e63 100%);
+  --gemini-gradient-soft: linear-gradient(135deg, rgba(66, 133, 244, 0.08) 0%, rgba(155, 81, 224, 0.08) 50%, rgba(233, 30, 99, 0.08) 100%);
+  --gemini-glow: rgba(66, 133, 244, 0.2);
   
-  --text-main: #22211f;
-  --text-muted: #6b685f;
-  --text-light: #99958a;
+  --text-main: #1f1f1f;
+  --text-muted: #444746;
+  --text-light: #747775;
   
-  --user-bubble-bg: #eae7dd;
-  --user-bubble-text: #22211f;
+  --user-bubble-bg: #f0f4f9;
+  --user-bubble-text: #1f1f1f;
   
-  --hitl-bg: #fffcf9;
-  --hitl-border: #d97757;
-  --hitl-accent: #c46445;
+  --hitl-bg: #ffffff;
+  --hitl-border: #1a73e8;
+  --hitl-accent: #1a73e8;
   
-  --success-bg: #eaf3ea;
-  --success-text: #1d721d;
+  --success-bg: #e6f4ea;
+  --success-text: #137333;
   
-  --font-serif: 'Newsreader', Georgia, serif;
+  --font-brand: 'Google Sans', 'Outfit', 'Inter', -apple-system, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   
-  --shadow-dock: 0 10px 30px rgba(40, 35, 25, 0.08), 0 2px 8px rgba(40, 35, 25, 0.03);
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.03);
+  --shadow-dock: 0 12px 36px rgba(0, 0, 0, 0.06), 0 2px 10px rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -46,95 +50,96 @@ body, html {
   height: 100%;
   width: 100%;
   font-family: var(--font-sans);
-  background-color: var(--claude-bg);
+  background-color: var(--gemini-bg);
   color: var(--text-main);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 /* App Layout */
-.claude-app {
+.gemini-app {
   display: flex;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: var(--claude-bg);
+  background-color: var(--gemini-bg);
 }
 
 /* ==========================================================================
-   Sidebar (Claude Desktop Style)
+   Sidebar (Google Gemini Design)
    ========================================================================== */
-.claude-sidebar {
-  width: 260px;
-  background-color: var(--claude-sidebar-bg);
-  border-right: 1px solid var(--claude-sidebar-border);
+.gemini-sidebar {
+  width: 270px;
+  background-color: var(--gemini-sidebar-bg);
+  border-right: 1px solid var(--gemini-sidebar-border);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 16px;
-  transition: transform 0.25s ease, margin-left 0.25s ease;
+  padding: 18px 16px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 20;
 }
 
-.claude-sidebar.collapsed {
-  margin-left: -260px;
+.gemini-sidebar.collapsed {
+  margin-left: -270px;
 }
 
 .sidebar-top {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 4px 6px;
+  gap: 12px;
+  padding: 4px 8px;
 }
 
-.claude-logo {
-  width: 32px;
-  height: 32px;
-  background-color: var(--claude-accent);
-  color: #ffffff;
-  border-radius: 8px;
+.gemini-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid var(--gemini-card-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(217, 119, 87, 0.3);
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.15);
 }
 
 .brand-name {
-  font-family: var(--font-serif);
+  font-family: var(--font-brand);
   font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.3px;
-  color: var(--text-main);
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  background: var(--gemini-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .new-chat-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
-  padding: 10px 14px;
-  background-color: var(--claude-card-bg);
-  border: 1px solid var(--claude-card-border);
-  border-radius: 8px;
-  font-family: var(--font-sans);
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--text-main);
+  padding: 12px 16px;
+  background-color: var(--gemini-blue-light);
+  border: none;
+  border-radius: 28px;
+  font-family: var(--font-brand);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gemini-blue);
   cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  transition: all 0.2s ease;
 }
 
 .new-chat-btn:hover {
-  background-color: #fcfbfa;
-  border-color: #d2cebf;
+  background-color: #d2e3fc;
   transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.15);
 }
 
 .sidebar-section {
@@ -144,12 +149,12 @@ body, html {
 
 .section-label {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: var(--text-light);
-  margin-bottom: 8px;
-  padding: 0 6px;
+  margin-bottom: 10px;
+  padding: 0 8px;
 }
 
 .recent-list {
@@ -162,46 +167,47 @@ body, html {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
-  border-radius: 6px;
-  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  font-size: 13.5px;
   color: var(--text-muted);
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .recent-item:hover, .recent-item.active {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: var(--text-main);
+  background-color: var(--gemini-blue-light);
+  color: var(--gemini-blue);
+  font-weight: 500;
 }
 
 .sidebar-bottom {
-  border-top: 1px solid var(--claude-sidebar-border);
-  padding-top: 14px;
+  border-top: 1px solid var(--gemini-sidebar-border);
+  padding-top: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .persona-card {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--claude-sidebar-border);
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background-color: var(--gemini-bg);
+  border: 1px solid var(--gemini-sidebar-border);
 }
 
 .persona-avatar {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background-color: var(--claude-accent-light);
-  color: var(--claude-accent);
+  background: var(--gemini-gradient);
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   display: flex;
@@ -217,16 +223,17 @@ body, html {
 
 .persona-label {
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--text-light);
+  letter-spacing: 0.5px;
 }
 
 .persona-select {
   border: none;
   background: transparent;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-main);
   outline: none;
@@ -235,44 +242,45 @@ body, html {
 }
 
 .eval-badge {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--success-text);
   background-color: var(--success-bg);
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 /* ==========================================================================
-   Main Main Canvas (Claude Desktop)
+   Main Canvas Area
    ========================================================================== */
-.claude-main {
+.gemini-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: var(--claude-bg);
+  background-color: var(--gemini-bg);
   position: relative;
   overflow: hidden;
 }
 
-.claude-header {
-  height: 52px;
-  padding: 0 20px;
+.gemini-header {
+  height: 58px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--claude-sidebar-border);
-  background-color: var(--claude-bg);
+  border-bottom: 1px solid var(--gemini-sidebar-border);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .sidebar-toggle-btn {
@@ -280,8 +288,8 @@ body, html {
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
+  padding: 8px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -296,29 +304,31 @@ body, html {
 .model-selector {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .model-name {
-  font-family: var(--font-serif);
-  font-size: 17px;
-  font-weight: 500;
+  font-family: var(--font-brand);
+  font-size: 18px;
+  font-weight: 700;
   color: var(--text-main);
+  letter-spacing: -0.2px;
 }
 
 .mesh-badge {
-  background-color: var(--claude-accent-light);
-  color: var(--claude-accent);
-  font-size: 10px;
+  background: var(--gemini-gradient-soft);
+  color: var(--gemini-blue);
+  border: 1px solid rgba(66, 133, 244, 0.2);
+  font-size: 10.5px;
   font-weight: 700;
-  padding: 2px 7px;
+  padding: 3px 10px;
   border-radius: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .header-right .org-tag {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--text-light);
   font-weight: 500;
 }
@@ -331,20 +341,20 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 52px);
+  height: calc(100vh - 58px);
   overflow: hidden;
   position: relative;
 }
 
 .chat-messages-container {
   width: 100%;
-  max-width: 780px;
+  max-width: 820px;
   flex: 1;
-  padding: 32px 24px 200px 24px;
+  padding: 36px 24px 210px 24px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
   scroll-behavior: smooth;
 }
 
@@ -362,12 +372,12 @@ body, html {
 .message-row.user .bubble {
   background-color: var(--user-bubble-bg);
   color: var(--user-bubble-text);
-  padding: 12px 18px;
-  border-radius: 18px 18px 4px 18px;
-  font-size: 14.5px;
+  padding: 14px 20px;
+  border-radius: 20px 20px 4px 20px;
+  font-size: 15px;
   line-height: 1.55;
   max-width: 82%;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
   white-space: pre-wrap;
 }
 
@@ -375,18 +385,18 @@ body, html {
   align-items: flex-start;
 }
 
-.claude-avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background-color: var(--claude-accent);
+.gemini-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gemini-gradient);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   margin-top: 2px;
-  box-shadow: 0 2px 6px rgba(217, 119, 87, 0.25);
+  box-shadow: 0 3px 10px rgba(66, 133, 244, 0.3);
 }
 
 .message-content {
@@ -398,17 +408,19 @@ body, html {
 }
 
 .welcome-heading {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 500;
-  color: var(--text-main);
-  margin-bottom: 4px;
-  letter-spacing: -0.3px;
+  font-family: var(--font-brand);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: var(--gemini-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
 }
 
 .message-row.bot .bubble {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text-main);
   white-space: pre-wrap;
 }
@@ -419,34 +431,35 @@ body, html {
   gap: 8px;
   font-size: 11px;
   color: var(--text-light);
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .badge {
   font-size: 10px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .badge-agent {
-  background-color: #e5e2d8;
-  color: #55524a;
+  background-color: #f1f3f4;
+  color: #3c4043;
 }
 
 .badge-status {
-  background-color: #eaf3ea;
+  background-color: var(--success-bg);
   color: var(--success-text);
 }
 
 .badge-grounding {
-  background-color: #f5e6df;
-  color: #c46445;
+  background-color: #fce8e6;
+  color: #c5221f;
 }
 
 .badge-grounding.valid {
-  background-color: #eaf3ea;
+  background-color: var(--success-bg);
   color: var(--success-text);
 }
 
@@ -454,71 +467,90 @@ body, html {
    HITL Card (Human in the Loop)
    ========================================================================== */
 .hitl-card {
-  margin-top: 12px;
-  background-color: var(--hitl-bg);
-  border: 1.5px solid var(--hitl-border);
-  border-radius: 12px;
-  padding: 16px 20px;
-  box-shadow: var(--shadow-sm);
+  margin-top: 14px;
+  background-color: #ffffff;
+  border: 1.5px solid var(--gemini-blue);
+  border-radius: 16px;
+  padding: 18px 22px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.hitl-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gemini-gradient);
 }
 
 .hitl-card h4 {
-  font-family: var(--font-sans);
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--hitl-accent);
+  font-family: var(--font-brand);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--gemini-blue);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .hitl-summary {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--text-main);
-  line-height: 1.5;
-  margin-bottom: 14px;
+  line-height: 1.55;
+  margin-bottom: 16px;
 }
 
 .hitl-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .btn-confirm {
-  background-color: var(--claude-accent);
+  background: var(--gemini-blue);
   color: #ffffff;
   border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-family: var(--font-brand);
   font-weight: 600;
-  font-size: 12.5px;
+  font-size: 13px;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.25);
 }
 
 .btn-confirm:hover {
-  background-color: var(--claude-accent-hover);
+  background-color: var(--gemini-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(26, 115, 232, 0.35);
 }
 
 .btn-cancel {
   background-color: #ffffff;
-  border: 1px solid var(--claude-card-border);
+  border: 1px solid var(--gemini-card-border);
   color: var(--text-muted);
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 12.5px;
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-family: var(--font-brand);
+  font-weight: 600;
+  font-size: 13px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-cancel:hover {
-  background-color: #f7f5f0;
+  background-color: #f8f9fa;
   color: var(--text-main);
+  border-color: #bdc1c6;
 }
 
 /* ==========================================================================
-   Input Dock Area (Claude Desktop Style)
+   Input Dock Area (Google Gemini Floating Glass Style)
    ========================================================================== */
 .input-dock {
   position: absolute;
@@ -528,8 +560,8 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 24px 20px 24px;
-  background: linear-gradient(to top, var(--claude-bg) 85%, rgba(247, 245, 240, 0));
+  padding: 0 24px 22px 24px;
+  background: linear-gradient(to top, var(--gemini-bg) 85%, rgba(248, 24a, 253, 0));
   z-index: 10;
   pointer-events: none;
 }
@@ -541,11 +573,11 @@ body, html {
 /* Suggested Pills */
 .suggested-section {
   width: 100%;
-  max-width: 780px;
+  max-width: 820px;
   display: flex;
-  gap: 8px;
+  gap: 10px;
   overflow-x: auto;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
   scrollbar-width: none;
 }
 
@@ -556,45 +588,48 @@ body, html {
 .suggested-pill {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background-color: var(--claude-card-bg);
-  border: 1px solid var(--claude-card-border);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
+  gap: 8px;
+  background-color: #ffffff;
+  border: 1px solid var(--gemini-card-border);
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-family: var(--font-brand);
+  font-size: 12.5px;
   font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .suggested-pill:hover {
-  border-color: var(--claude-accent);
-  color: var(--claude-accent);
-  background-color: var(--claude-accent-light);
-  transform: translateY(-1px);
+  border-color: var(--gemini-blue);
+  color: var(--gemini-blue);
+  background-color: var(--gemini-blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(26, 115, 232, 0.12);
 }
 
 /* Main Input Card */
-.claude-input-card {
+.gemini-input-card {
   width: 100%;
-  max-width: 780px;
-  background-color: var(--claude-card-bg);
-  border: 1.5px solid var(--claude-card-border);
-  border-radius: 18px;
-  padding: 14px 16px;
+  max-width: 820px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid var(--gemini-card-border);
+  border-radius: 24px;
+  padding: 16px 20px;
   box-shadow: var(--shadow-dock);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  gap: 10px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.claude-input-card:focus-within {
-  border-color: var(--claude-accent);
-  box-shadow: 0 10px 32px var(--claude-accent-glow), 0 2px 8px rgba(0,0,0,0.03);
+.gemini-input-card:focus-within {
+  border-color: var(--gemini-blue);
+  box-shadow: 0 8px 30px var(--gemini-glow), 0 2px 10px rgba(0,0,0,0.03);
 }
 
 .chat-input {
@@ -602,12 +637,12 @@ body, html {
   border: none;
   outline: none;
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 15.5px;
   color: var(--text-main);
   background: transparent;
   resize: none;
   max-height: 160px;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .chat-input::placeholder {
@@ -622,32 +657,33 @@ body, html {
 }
 
 .input-hint {
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--text-light);
 }
 
 .send-btn {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: var(--claude-accent);
+  background: var(--gemini-gradient);
   color: #ffffff;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.25);
 }
 
 .send-btn:hover {
-  background-color: var(--claude-accent-hover);
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(66, 133, 244, 0.35);
 }
 
 .footer-disclaimer {
-  margin-top: 8px;
-  font-size: 11px;
+  margin-top: 10px;
+  font-size: 11.5px;
   color: var(--text-light);
   text-align: center;
 }
