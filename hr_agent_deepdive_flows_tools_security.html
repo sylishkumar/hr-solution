@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deep Dive: Agent Flow, Tools & Security Perimeter</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      securityLevel: 'loose',
+      themeVariables: {
+        fontSize: '14px',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --border: #e0e3e7;
+      --text: #202124;
+      --subtext: #5f6368;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 30px 20px;
+    }
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .header {
+      margin-bottom: 28px;
+    }
+    .badge {
+      background: #e8f0fe;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 26px;
+      margin: 8px 0 4px 0;
+      color: var(--text);
+    }
+    .subtitle {
+      color: var(--subtext);
+      font-size: 14px;
+      margin: 0;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #174ea6;
+      border-bottom: 1px solid #f1f3f4;
+      padding-bottom: 8px;
+    }
+    .diagram-box {
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #e8eaed;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f1f3f4;
+      color: #202124;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background: #fafafa;
+    }
+    code {
+      background: #f1f3f4;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: Menlo, Monaco, Consolas, monospace;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .mini-card {
+      background: #f8f9fa;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+    }
+    .mini-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #202124;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <span class="badge">Architecture Deep Dive</span>
+      <h1>Agent Flow, Tool Registry & Security Perimeter</h1>
+      <p class="subtitle">Detailed breakdown of Multi-Agent Orchestration, MCP Integrations, and Active Model Armor AI Firewall.</p>
+    </div>
+
+    <!-- Section 1: Agent Flow -->
+    <div class="section-card">
+      <h2>🤖 1. Agent Flow & Multi-Agent Orchestration</h2>
+      <p style="color:var(--subtext);font-size:14px;margin-top:0;">
+        Root Orchestrator (<b>Gemini 3.1 Pro</b>) performs intent decomposition and delegates tasks to scoped Sub-Agents (<b>Gemini 3.7 Flash</b>), enforcing state checkpoints and human confirmation gates.
+      </p>
+      
+      <div class="diagram-box">
+        <div class="mermaid">
+flowchart TD
+    classDef client fill:#E8F0FE,stroke:#1A73E8,stroke-width:1.5px,color:#174EA6;
+    classDef orch fill:#E6F4EA,stroke:#137333,stroke-width:1.5px,color:#0D652D;
+    classDef subagent fill:#FEF7E0,stroke:#F9AB00,stroke-width:1.5px,color:#B06000;
+    classDef gate fill:#FCE8E6,stroke:#D93025,stroke-width:1.5px,color:#A50E0E;
+
+    UserTurn["<b>Incoming User Turn</b><br>(Text / Voice Stream)"]:::client --> Root["<b>Root Orchestrator (Gemini 3.1 Pro)</b><br>• Intent Routing & Session Tracking<br>• Injected Identity: EMP1024"]:::orch
+
+    Root -->|1. Policy Query| PQA["<b>PolicyQAAgent</b><br><i>Gemini 3.7 Flash</i><br>• Strictly Read-Only<br>• Vertex Search RAG"]:::subagent
+    Root -->|2. HCM Task| WWA["<b>WorkWeekAgent</b><br><i>Gemini 3.7 Flash</i><br>• Read Balances<br>• Propose Leave"]:::subagent
+    Root -->|3. ITSM Task| SIA["<b>ServiceImmediatelyAgent</b><br><i>Gemini 3.7 Flash</i><br>• Search Incidents<br>• Propose Tickets"]:::subagent
+
+    WWA & SIA -->|Mutating Actions| HITL{"<b>HITL Confirmation Gate</b><br>User Approves Action?"}:::gate
+    
+    HITL -->|Cancel| Abort["Cancel & Clear Proposal"]:::gate
+    HITL -->|Confirm| Commit["<b>Atomic Commit</b><br>• UUIDv4 Idempotency Key<br>• Commit to MCP SaaS<br>• Checkpoint in Agent Engine"]:::orch
+
+    PQA --> Synthesize["<b>Response Synthesis</b><br>• Grounding Attribution Mapping<br>• Verification Gate (Score &ge; 0.85)"]:::orch
+    Commit --> Synthesize
+    Synthesize --> StreamOut["<b>Stream to Client</b><br>SSE Text / WebSocket Audio"]:::client
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="mini-card">
+          <strong>⚡ Parallel Speculative Pre-Fetching</strong>
+          Compound turns run policy grounding & ERP balance queries in parallel (<code>asyncio.gather</code>), cutting I/O wait time by <b>48%</b> (down to ~550ms).
+        </div>
+        <div class="mini-card">
+          <strong>🔒 Idempotency & HITL Gating</strong>
+          No autonomous ERP mutations. Every write requires explicit approval via interactive Action Cards with client-generated <code>UUIDv4</code> deduplication.
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Tools & MCP Connectors -->
+    <div class="section-card">
+      <h2>🛠️ 2. Tool Registry & Integration Fabric (MCP)</h2>
+      <p style="color:var(--subtext);font-size:14px;margin-top:0;">
+        Vertex AI Integration Connectors provide connection pooling, VPC security, and synchronous 3x retries for standard Model Context Protocol (MCP) endpoints.
+      </p>
+
+      <div class="diagram-box">
+        <div class="mermaid">
+flowchart LR
+    classDef agent fill:#E8F0FE,stroke:#1A73E8,stroke-width:1.5px,color:#174EA6;
+    classDef connector fill:#FEF7E0,stroke:#F9AB00,stroke-width:1.5px,color:#B06000;
+    classDef saas fill:#E6F4EA,stroke:#137333,stroke-width:1.5px,color:#0D652D;
+
+    PolicyAgent["<b>PolicyQAAgent</b><br>(Read-Only)"]:::agent
+    WWAgent["<b>WorkWeekAgent</b><br>(HCM)"]:::agent
+    SIAgent["<b>ServiceImmediatelyAgent</b><br>(ITSM)"]:::agent
+
+    RAGConn["<b>Vertex AI Search</b><br>Hybrid RAG + Vector ACL"]:::connector
+    MCPConn1["<b>Managed MCP Connector</b><br>3x Retries + Jitter"]:::connector
+    MCPConn2["<b>Managed MCP Connector</b><br>Circuit Breaker (15% 5xx)"]:::connector
+
+    GCS[("<b>Cloud Storage</b><br>HR Policies")]:::saas
+    WW[("<b>WorkWeek HCM</b><br>/work-week/mcp/")]:::saas
+    SI[("<b>ServiceImmediately</b><br>/service-immediately/mcp/")]:::saas
+
+    PolicyAgent -->|search_hr_handbook| RAGConn <--> GCS
+    WWAgent -->|get_balances, request_time_off| MCPConn1 <--> WW
+    SIAgent -->|search_incidents, create_ticket| MCPConn2 <--> SI
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Sub-Agent</th>
+            <th>Tool Name</th>
+            <th>Endpoint / Protocol</th>
+            <th>Type</th>
+            <th>Security & Constraints</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>PolicyQAAgent</b></td>
+            <td><code>search_hr_handbook</code></td>
+            <td><code>Vertex AI Search</code></td>
+            <td>Read-Only</td>
+            <td>Vector ACL: <code>acl_group IN ('corp-all')</code>. Grounding Score &ge; 0.85.</td>
+          </tr>
+          <tr>
+            <td><b>WorkWeekAgent</b></td>
+            <td><code>get_employee_balances</code></td>
+            <td><code>GET /work-week/mcp/balances</code></td>
+            <td>Read-Only</td>
+            <td>Scoped strictly to authenticated <code>EMP1024</code>.</td>
+          </tr>
+          <tr>
+            <td><b>WorkWeekAgent</b></td>
+            <td><code>request_time_off</code></td>
+            <td><code>POST /work-week/mcp/timeoff</code></td>
+            <td>Mutating</td>
+            <td>Mandatory HITL approval card. Requires <code>idempotency_key</code>.</td>
+          </tr>
+          <tr>
+            <td><b>ServiceImmediatelyAgent</b></td>
+            <td><code>search_incidents</code></td>
+            <td><code>GET /service-immediately/mcp/incidents</code></td>
+            <td>Read-Only</td>
+            <td>Bounded by <code>requested_by: EMP1024</code>.</td>
+          </tr>
+          <tr>
+            <td><b>ServiceImmediatelyAgent</b></td>
+            <td><code>create_ticket</code></td>
+            <td><code>POST /service-immediately/mcp/tickets</code></td>
+            <td>Mutating</td>
+            <td>Mandatory HITL approval card. Requires <code>idempotency_key</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 3: Model Armor & Agent Gateway -->
+    <div class="section-card">
+      <h2>🛡️ 3. Security Perimeter: Agent Gateway & Model Armor</h2>
+      <p style="color:var(--subtext);font-size:14px;margin-top:0;">
+        Active 3-stage AI firewall inspecting prompt ingress, tool returns, and model outputs with zero weight memorization and sub-100ms inspection latency.
+      </p>
+
+      <div class="diagram-box">
+        <div class="mermaid">
+flowchart TD
+    classDef client fill:#E8F0FE,stroke:#1A73E8,stroke-width:1.5px,color:#174EA6;
+    classDef gw fill:#FCE8E6,stroke:#D93025,stroke-width:1.5px,color:#A50E0E;
+    classDef armor fill:#FEEFC3,stroke:#B06000,stroke-width:1.5px,color:#4E2700;
+    classDef core fill:#E6F4EA,stroke:#137333,stroke-width:1.5px,color:#0D652D;
+
+    User["<b>Employee Ingress</b><br>(Gemini App / Web Widget)"]:::client --> GW["<b>GEAP Agent Gateway</b><br>• Cloud Identity OAuth2/OIDC Validation<br>• Token Bucket: 50 req/min/user, 500 req/min/IP<br>• Server-Side Caller Context: <code>EMP1024</code>"]:::gw
+
+    GW --> S1["<b>Model Armor — Stage 1: Ingress Inspection</b><br>• Direct Prompt Injection & Jailbreak Filter<br>• Inline SPII Redaction: <code>[REDACTED_SSN]</code>, Phone, Health Notes"]:::armor
+
+    S1 -->|Clean Context| Mesh["<b>Managed Multi-Agent Core</b><br>Root Orchestrator (Gemini 3.1 Pro)"]:::core
+
+    Mesh <--> Tools["Tool Execution via MCP Connectors"]:::core
+    Tools --> S2["<b>Model Armor — Stage 2: Tool Sanitization</b><br>• Indirect Prompt Injection Screening<br>• Stripping sensitive unrequested fields"]:::armor
+    S2 --> Mesh
+
+    Mesh --> S3["<b>Model Armor — Stage 3: Egress & Grounding Gate</b><br>• System Prompt Leakage Defense<br>• Grounding Verification (Score &ge; 0.85)<br>• Automated Refusal Gate for Unverified Content"]:::armor
+
+    S3 -->|Verified Output Stream| Out["<b>Client Delivery</b><br>SSE Text / WebSocket Audio"]:::client
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Security Layer</th>
+            <th>Component</th>
+            <th>Threats Mitigated</th>
+            <th>Automated Safeguard Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Identity & Rate Limits</b></td>
+            <td>GEAP Agent Gateway</td>
+            <td>Identity spoofing, DoS, brute-force requests</td>
+            <td>Extracts Cloud Identity claim (<code>EMP1024</code>); enforces 50 req/min user limit with <code>429</code> backoff.</td>
+          </tr>
+          <tr>
+            <td><b>Stage 1: Ingress</b></td>
+            <td>Model Armor (Prompts & Audio)</td>
+            <td>Direct prompt injection, jailbreaks, PII exposure</td>
+            <td>Replaces sensitive tokens inline with <code>[REDACTED_SSN]</code>, <code>[REDACTED_PHONE]</code> before model ingestion.</td>
+          </tr>
+          <tr>
+            <td><b>Stage 2: Tool Returns</b></td>
+            <td>Model Armor (MCP Payloads)</td>
+            <td>Indirect prompt injections in tickets or ERP notes</td>
+            <td>Sanitizes JSON payloads from WorkWeek and ITSM before context is injected into LLM reasoning buffer.</td>
+          </tr>
+          <tr>
+            <td><b>Stage 3: Egress Gate</b></td>
+            <td>Model Armor + Vertex Grounding</td>
+            <td>Hallucinations, unverified policy statements</td>
+            <td>Computes <code>groundingScore</code>. If &lt; 0.85, executes safe refusal: <i>"Policy unverified in HR Handbook."</i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
