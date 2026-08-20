@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise HR Agentic Assistant</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-title">
+        <span class="logo-badge">HR AGENTIC</span>
+        <h1>Enterprise Assistant Mesh</h1>
+      </div>
+      <div class="header-controls">
+        <div class="persona-selector">
+          <label for="employeeSelect">Employee:</label>
+          <select id="employeeSelect" class="persona-select">
+            <option value="EMP1024">Aish Prabhat (EMP1024)</option>
+            <option value="EMP2048">Jane Doe (EMP2048)</option>
+          </select>
+        </div>
+        <div id="evalBadge" class="eval-badge">✓ Evals: Loading...</div>
+      </div>
+    </header>
+
+    <!-- Chat Messages Container -->
+    <main id="chatMessages" class="chat-body">
+      <div class="message-row bot">
+        <div class="bubble">Hello! I am your Enterprise HR Agentic Assistant. How can I help you today with corporate policies, leave balances, or IT support tickets?</div>
+        <div class="meta-info">
+          <span class="badge badge-agent">RootOrchestrator</span>
+          <span>Status: READY</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Suggested Actions -->
+    <div class="suggested-section">
+      <button class="suggested-pill" data-prompt="how much leave do i have">How much leave do I have?</button>
+      <button class="suggested-pill" data-prompt="can you raise a service ticket for my laptop">Raise a service ticket for my laptop</button>
+      <button class="suggested-pill" data-prompt="What is the company policy on home office monitors?">What is the policy on home office monitors?</button>
+      <button class="suggested-pill" data-prompt="Update my home address">Update my home address</button>
+    </div>
+
+    <!-- Input Footer -->
+    <footer class="chat-footer">
+      <form id="chatForm" class="input-form">
+        <input type="text" id="userInput" class="chat-input" placeholder="Type your HR or IT request..." autocomplete="off">
+        <button type="submit" class="send-btn">Send</button>
+      </form>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
