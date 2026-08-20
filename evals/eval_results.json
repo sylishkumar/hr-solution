@@ -1,9 +1,9 @@
 {
   "evaluation_metadata": {
-    "eval_run_id": "eval-run-20260819-121420",
-    "timestamp": "2026-08-19T12:14:20.719645",
+    "eval_run_id": "eval-run-20260820-105516",
+    "timestamp": "2026-08-20T10:55:16.568527",
     "judge_model": "gemini-2.5-pro",
-    "eval_duration_seconds": 43.97,
+    "eval_duration_seconds": 72.43,
     "total_test_cases": 502
   },
   "summary_metrics": {

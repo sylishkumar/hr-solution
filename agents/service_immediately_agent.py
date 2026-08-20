@@ -35,9 +35,10 @@ class ServiceImmediatelyAgent:
         category: str,
         short_description: str,
         priority: str = "3 - Moderate",
-        assignment_group: str = "Service Desk"
+        assignment_group: str = "Service Desk",
+        response_msg: Optional[str] = None
     ) -> Dict[str, Any]:
-        return {
+        res = {
             "agent": "ServiceImmediatelyAgent",
             "status": "HITL_REQUIRED",
             "action": "create_ticket",
@@ -50,6 +51,9 @@ class ServiceImmediatelyAgent:
             },
             "card_summary": f"Confirm creating IT support ticket for '{short_description}' (Category: {category}, Priority: {priority})."
         }
+        if response_msg:
+            res["response"] = response_msg
+        return res
 
     def execute_ticket_creation(self, parameters: Dict[str, Any]) -> Dict[str, Any]:
         requested_by = parameters.get("requested_by", "EMP1024")

@@ -17,3 +17,11 @@
 - **Supervisory Personal Relationships**: Romantic or physical relationships are strictly prohibited between employees where one individual supervises or exercises authority over the other. VP level and above must disclose all such relationships regardless of reporting line.
 - **Remote Work Data Security**: Confidential projects must not be worked on in public settings (coffee shops, libraries). Must use privacy screens and headphones during meetings.
 - **Community Guidelines**: Disrupting WorkWeek for political or non-work debates is prohibited. Zero tolerance for trolling, doxxing, or harassment.
+
+## Section 4: IT Support Tickets & Response SLAs (ServiceImmediately)
+- **ITSM Ticket Priority & Response Times**:
+  - **P1 (Critical / Priority 1)**: Major business disruption or unusable primary work device (e.g., broken/inoperable laptop with no workaround). Expected response time is **1 hour** (24/7 priority support).
+  - **P2 (High / Priority 2)**: Significant impact affecting key workflows with limited workaround. Expected response time is **4 hours**.
+  - **P3 (Moderate / Priority 3)**: Standard hardware or software issues. Expected response time is **24 hours (1 business day)**.
+  - **P4 (Low / Priority 4)**: General IT inquiries or minor requests. Expected response time is **48 hours (2 business days)**.
+

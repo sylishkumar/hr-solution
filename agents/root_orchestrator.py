@@ -159,16 +159,57 @@ class RootOrchestrator:
             return self.itsm_agent.get_tickets(employee_id)
 
         # ITSM ServiceImmediately Intents - Create Ticket
-        if any(w in lowered_prompt for w in [
+        is_ticket_intent = any(w in lowered_prompt for w in [
             "open ticket", "create ticket", "submit ticket", "report issue",
             "broken laptop", "it ticket", "service ticket", "raise a ticket",
-            "raise ticket", "ticket for my", "file a ticket", "log a ticket"
-        ]):
+            "raise ticket", "ticket for my", "file a ticket", "log a ticket",
+            "issue with my laptop", "laptop issue", "laptop problem", "p1 ticket",
+            "p2 ticket", "p3 ticket", "raise a p1", "raise a p2", "raise a p3"
+        ]) or (
+            "ticket" in lowered_prompt and any(w in lowered_prompt for w in ["raise", "create", "open", "submit", "log", "file", "p1", "p2", "p3", "laptop", "issue", "hardware"])
+        ) or (
+            any(w in lowered_prompt for w in ["laptop issue", "issue with my laptop", "broken laptop"]) and any(w in lowered_prompt for w in ["ticket", "p1", "p2", "raise", "report"])
+        )
+
+        if is_ticket_intent:
+            # Determine Priority
+            if any(p in lowered_prompt for p in ["p1", "critical", "urgent", "priority 1"]):
+                priority = "1 - Critical"
+            elif any(p in lowered_prompt for p in ["p2", "high priority", "priority 2"]):
+                priority = "2 - High"
+            elif any(p in lowered_prompt for p in ["p4", "low priority", "priority 4"]):
+                priority = "4 - Low"
+            else:
+                priority = "3 - Moderate"
+
+            # Determine Category
+            category = "Hardware" if any(h in lowered_prompt for h in ["laptop", "monitor", "keyboard", "hardware", "screen", "mouse", "device"]) else "IT Support"
+
+            # Form Short Description
+            if "laptop" in lowered_prompt:
+                short_description = "Laptop Issue - Urgent/P1" if priority == "1 - Critical" else "Laptop Service Request"
+            else:
+                short_description = "IT Service Support Request"
+
+            # SLA / Response time explanation if asked in prompt
+            sla_text = None
+            if any(s in lowered_prompt for s in ["response time", "expected response", "sla", "how long", "how fast", "turnaround"]):
+                sla_map = {
+                    "1 - Critical": "1 hour (24/7 priority support)",
+                    "2 - High": "4 hours",
+                    "3 - Moderate": "24 hours (1 business day)",
+                    "4 - Low": "48 hours (2 business days)"
+                }
+                expected_sla = sla_map.get(priority, "1 hour (24/7 priority support)")
+                sla_text = f"According to Altostrat ITSM Policy, the expected response time for a **{priority}** ticket is **{expected_sla}**.\n\nI have generated the ticket creation request below for your confirmation:"
+
             return self.itsm_agent.propose_ticket_creation(
                 requested_by=employee_id,
-                category="Hardware",
-                short_description="Laptop Service Request",
-                priority="3 - Moderate"
+                category=category,
+                short_description=short_description,
+                priority=priority,
+                assignment_group="Hardware Support" if category == "Hardware" else "Service Desk",
+                response_msg=sla_text
             )
 
         # Fallback to Policy Q&A Agent
