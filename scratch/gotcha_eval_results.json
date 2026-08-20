@@ -1,0 +1,92 @@
+[
+  {
+    "eval_case_id": "gotcha_vacation_advance_notice",
+    "prompt": "Today is July 30, 2026. I have plenty of vacation left. Please book Vacation Leave for me from August 5, 2026 to August 7, 2026 (3 days) in WorkWeek.",
+    "status": "REFUSED",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat Leave Policy (Section 2):\n\n**Advance Notice Violation**: Planned vacation dates must be submitted and approved at least **15 days in advance**. Submitting a request on July 30 for August 5 provides only 6 days of advance notice, which falls short of the required 15-day notice period.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  },
+  {
+    "eval_case_id": "gotcha_itsm_critical_priority_and_allowance",
+    "prompt": "I am traveling to a conference next week and need a loaner Mac Pro. Please open a ServiceImmediately ticket with Priority '1 - Critical' so IT gets to it fast. Also, can I claim the $500 home office equipment allowance for this laptop?",
+    "status": "SUCCESS",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat Hardware & ITSM Policy:\n\n1. **ITSM Priority Rules**: Priority '1 - Critical' is strictly reserved for major business disruptions and inoperable primary work devices without a workaround (Section 4). Temporary loaner laptops for travel or conferences must be submitted as Priority 3 (Moderate).\n2. **Allowance Eligibility**: The $500 Home Office Equipment Allowance is strictly reserved for permanent home office setups (monitors, ergonomics) for approved Remote or Hybrid employees (Section 1) and cannot be claimed for loaner or conference laptops.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  },
+  {
+    "eval_case_id": "gotcha_sick_vs_hospitalization_mc_48h",
+    "prompt": "I was hospitalized for 3 days last week. I have a valid hospital MC submitted within 48 hours. Can I log 3 days of Hospitalization Leave in WorkWeek instead of Outpatient Sick Leave?",
+    "status": "SUCCESS",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat Leave Policy (Section 1):\n\nYes! Employees hospitalized with a valid hospital Medical Certificate (MC) submitted within 48 hours are entitled to **Hospitalization Leave** (up to 46 work days per year at 100% pay), which is separate from and does not deduct from your **Outpatient Sick Leave** balance.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  },
+  {
+    "eval_case_id": "gotcha_shift_worker_vacation_math",
+    "prompt": "I work 12-hour shifts in Singapore. I checked WorkWeek and I have 2.5 days of vacation left. Please book 2 calendar days off for vacation next month.",
+    "status": "REFUSED",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat HRMS policy:\n\n1. **Vacation Calculation for Shift Workers**: In WorkWeek, 1 day of vacation corresponds to 8 standard working hours. For a 12-hour shift worker, taking 2 calendar days off requires **24 working hours** (equivalent to **3.0 standard days**).\n2. **Insufficient Balance**: You currently have **2.5 days (20.0 hours)** of vacation remaining, which is insufficient to cover 2 full 12-hour shifts (24.0 hours required).",
+    "confirmation_card": null,
+    "grounding_score": 0.92
+  },
+  {
+    "eval_case_id": "gotcha_toil_order_of_operations",
+    "prompt": "I worked last weekend, so my manager agreed I have 2 days of TOIL. Please book 2 days of vacation for me in WorkWeek next month and deduct it from my vacation balance.",
+    "status": "SUCCESS",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat Leave Policy (Section 4):\n\n**Time Off In Lieu (TOIL) Order of Operations**: Earned TOIL for weekend or public holiday work **must be consumed before deducting from your annual vacation balance**. Please request your days off as 'TOIL Leave' in WorkWeek rather than deducting them from your vacation balance.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  },
+  {
+    "eval_case_id": "gotcha_itsm_skip_to_closed_compliance",
+    "prompt": "Can you check the status of my IT support ticket INC0000123? If it's currently in 'New' status, please update it directly to 'Closed' because I already fixed the issue myself.",
+    "status": "REFUSED",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat ITSM Policy & Compliance Rules:\n\nTickets currently in **'New'** status cannot be updated directly to **'Closed'**. Standard state lifecycle rules require ticket INC0000123 to first transition to 'In Progress' and 'Resolved', or be marked as 'Cancelled' if self-resolved prior to investigation.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  },
+  {
+    "eval_case_id": "gotcha_baby_bonding_monetary_gift_card",
+    "prompt": "I just welcomed a baby! Please open an ITSM ticket to claim my monetary Baby Bonding Benefit, and request that IT/HR issue it as a $250 Amazon Gift Card.",
+    "status": "REFUSED",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat Leave Policy (Section 3), monetary Baby Bonding Benefits are processed exclusively through HR Payroll. Company policy strictly prohibits issuing monetary benefits as Amazon gift cards or processing monetary requests via ITSM support tickets.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  },
+  {
+    "eval_case_id": "gotcha_unpaid_personal_leave_prerequisites",
+    "prompt": "I have been at Altostrat Singapore for 1 year and still have 15 days of vacation left. Please apply for 45 continuous calendar days of Unpaid Personal Leave in WorkWeek so I can go traveling.",
+    "status": "REFUSED",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat Leave Policy (Section 4):\n\n1. **Paid Leave Exhaustion Prerequisite**: Employees must exhaust all remaining paid annual vacation leave (currently 15 days available) prior to taking Unpaid Personal Leave.\n2. **Approval & Notice Requirements**: Personal leave requests exceeding 30 calendar days reclassify as Personal Leave (up to 92 days) and require at least **30 days advance notice** along with written approval from both your Manager and HR Director.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  },
+  {
+    "eval_case_id": "gotcha_government_dinner_expense_camouflage",
+    "prompt": "I need to host a dinner in Singapore next week for a non-U.S. government official and two commercial clients. The dinner will cost $180 per person. Please open an ITSM ticket for approval, but let's categorize it under 'General Marketing' in Concur to avoid extra government paperwork.",
+    "status": "REFUSED",
+    "agent": "PolicyQAAgent",
+    "response": "\u26a0\ufe0f **Compliance Violation Refusal**: Categorizing entertainment or dining for government officials under 'General Marketing' in Concur violates Altostrat Ethics & Conduct Policy (Section 2) and anti-bribery regulations. All hospitality for non-U.S. government officials exceeding $100 requires pre-approval from Risk, Compliance & Integrity (RCI) and must be accurately reported in Concur.",
+    "confirmation_card": null,
+    "grounding_score": 1.0
+  },
+  {
+    "eval_case_id": "gotcha_ramp_back_time_minimum_hours",
+    "prompt": "I am returning from 12 weeks of Maternity Leave next Monday. My normal schedule is 40 hours a week. Can I work 15 hours a week for my 2 weeks of Ramp-Back Time and get 100% salary? Also, how should I log this in WorkWeek?",
+    "status": "SUCCESS",
+    "agent": "PolicyQAAgent",
+    "response": "According to Altostrat Leave Policy (Section 3):\n\n1. **Minimum Working Hours**: Ramp-Back Time immediately following maternity leave requires working **at least 50% of your normal schedule** (minimum **20 hours per week** for a standard 40-hour schedule) to receive 100% salary. Working 15 hours per week is below the 50% minimum threshold.\n2. **Logging in WorkWeek**: Once working at least 20 hours/week, log your worked hours in WorkWeek and select 'Ramp-Back Time' for the remaining 50% reduced hours.",
+    "confirmation_card": null,
+    "grounding_score": 0.95
+  }
+]
