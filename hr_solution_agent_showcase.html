@@ -622,12 +622,12 @@
         <div class="diagram-flow-row">
           <div class="diagram-node">
             <div class="diagram-node-title">Client Browser</div>
-            <div class="diagram-node-sub">Web UI / Mobile Application</div>
+            <div class="diagram-node-sub">Web UI / Mobile App</div>
           </div>
           <div class="arrow-connector">➔</div>
-          <div class="diagram-node">
-            <div class="diagram-node-title">Cloud Load Balancing & IAP</div>
-            <div class="diagram-node-sub">Authentication & Ingress Control</div>
+          <div class="diagram-node" style="border-color: #ea4335;">
+            <div class="diagram-node-title">Agent Gateway & Model Armor</div>
+            <div class="diagram-node-sub">OAuth2 Auth, Rate Limiting & Inline PII / Jailbreak AI Firewall</div>
           </div>
           <div class="arrow-connector">➔</div>
           <div class="diagram-node" style="border-color: #9b51e0;">
@@ -753,6 +753,16 @@
           </thead>
           <tbody>
             <tr>
+              <td><span class="tech-badge">Google Cloud Model Armor</span></td>
+              <td>AI Security Firewall & Guardrails</td>
+              <td>3-stage active defense inspecting ingress prompts (jailbreaks/PII redaction), tool return payloads, and egress responses. Implemented via app security shield and GCP Model Armor template.</td>
+            </tr>
+            <tr>
+              <td><span class="tech-badge">Agent Gateway & Cloud IAP</span></td>
+              <td>AI Ingress & Perimeter Security</td>
+              <td>Manages Cloud Identity OAuth2 authentication, per-user rate limiting, streaming SSE connection management, and secure tool access.</td>
+            </tr>
+            <tr>
               <td><span class="tech-badge">Cloud Run</span></td>
               <td>Application Hosting</td>
               <td>Hosts the containerized agent backend in `us-central1`, scaling automatically from 0 to handling concurrent HR queries.</td>
@@ -766,11 +776,6 @@
               <td><span class="tech-badge">Vertex AI Vector Search / Firestore</span></td>
               <td>Knowledge Base & State</td>
               <td>Stores vector embeddings of internal HR policies and maintains real-time user chat session history.</td>
-            </tr>
-            <tr>
-              <td><span class="tech-badge">Cloud IAM & IAP</span></td>
-              <td>Security & Access Control</td>
-              <td>Ensures only authorized employees access sensitive HR tools and policy data.</td>
             </tr>
             <tr>
               <td><span class="tech-badge">Cloud Logging & Monitoring</span></td>
