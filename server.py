@@ -88,6 +88,14 @@ async def serve_index():
         return FileResponse(index_file)
     return {"message": "HR Agentic Web UI Server running. Access static/index.html"}
 
+@app.get("/presentation")
+@app.get("/elevate")
+async def serve_presentation():
+    pres_file = os.path.join(os.path.dirname(__file__), "elevate_workshop_presentation.html")
+    if os.path.exists(pres_file):
+        return FileResponse(pres_file)
+    raise HTTPException(status_code=404, detail="Presentation file not found.")
+
 if __name__ == "__main__":
     import uvicorn
     logger.info("Starting FastAPI Web UI server on http://0.0.0.0:8000")
