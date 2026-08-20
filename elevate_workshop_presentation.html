@@ -6,7 +6,7 @@
   <title>Altostrat HR Agentic Mesh - Architecture & Elevate Workshop Playbook</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-canvas: #f8fafd;
@@ -36,7 +36,7 @@
       
       --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
       --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-      --shadow-lg: 0 12px 32px rgba(66, 133, 244, 0.12);
+      --shadow-lg: 0 12px 36px rgba(66, 133, 244, 0.12);
     }
 
     * {
@@ -55,7 +55,7 @@
 
     /* Top Navigation Header */
     header {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
       position: sticky;
@@ -150,7 +150,7 @@
 
     /* Main Content Wrapper */
     .container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 32px auto;
       padding: 0 24px;
     }
@@ -189,83 +189,75 @@
       gap: 10px;
     }
 
-    .section-title svg {
-      color: var(--gemini-blue);
-    }
-
     .section-subtitle {
       font-size: 15px;
       color: var(--text-muted);
       margin-bottom: 24px;
     }
 
-    /* Architecture Diagram Box */
-    .arch-diagram-wrapper {
-      background: #fafcff;
-      border: 1px solid #d0e1fd;
+    /* Visual SVG Architecture Container */
+    .svg-arch-container {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
       border-radius: 16px;
       padding: 24px;
-      overflow-x: auto;
-    }
-
-    .arch-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-    }
-
-    .arch-box {
-      background: #ffffff;
-      border: 1.5px solid var(--border-color);
-      border-radius: 14px;
-      padding: 16px;
       box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      overflow-x: auto;
+      text-align: center;
     }
 
-    .arch-box:hover {
-      border-color: var(--gemini-blue);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
+    /* Node Inspector Panel */
+    .inspector-panel {
+      margin-top: 24px;
+      background: #f8fafd;
+      border: 1.5px solid var(--gemini-blue);
+      border-radius: 16px;
+      padding: 24px;
+      display: none;
+      animation: fadeIn 0.2s ease;
     }
 
-    .box-header {
+    .inspector-title {
       font-family: var(--font-brand);
-      font-size: 13px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gemini-blue);
+      margin-bottom: 8px;
+    }
+
+    .inspector-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .inspector-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .inspector-lbl {
+      font-family: var(--font-brand);
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: var(--text-light);
+      margin-bottom: 4px;
     }
 
-    .box-title {
-      font-family: var(--font-brand);
-      font-size: 16px;
-      font-weight: 700;
+    .inspector-val {
+      font-size: 13.5px;
       color: var(--text-dark);
-      margin-bottom: 6px;
-    }
-
-    .box-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    .flow-arrow {
-      text-align: center;
-      font-size: 20px;
-      color: var(--gemini-blue);
-      padding: 8px 0;
+      line-height: 1.5;
     }
 
     /* Key Thought Cards */
     .thought-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 20px;
     }
 
@@ -274,7 +266,7 @@
       border: 1px solid var(--border-color);
       border-left: 4px solid var(--gemini-blue);
       border-radius: 14px;
-      padding: 20px;
+      padding: 22px;
       box-shadow: var(--shadow-sm);
     }
 
@@ -340,13 +332,13 @@
       background: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: 14px;
-      padding: 18px;
+      padding: 20px;
       text-align: center;
     }
 
     .metric-val {
       font-family: var(--font-brand);
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 800;
       background: var(--gemini-gradient);
       -webkit-background-clip: text;
@@ -358,6 +350,16 @@
       font-weight: 600;
       color: var(--text-muted);
       margin-top: 4px;
+    }
+
+    .arch-node {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .arch-node:hover rect {
+      stroke-width: 3;
+      filter: drop-shadow(0 4px 12px rgba(66, 133, 244, 0.25));
     }
   </style>
 </head>
@@ -376,7 +378,7 @@
           </linearGradient>
         </defs>
       </svg>
-      <div class="brand-title">Altostrat HR Solution - Elevate Workshop Playbook</div>
+      <div class="brand-title">Altostrat HR Solution - Elevate Workshop Architecture</div>
     </div>
     <div class="header-pills">
       <span class="pill-tag pill-model">Gemini 3.1 Pro</span>
@@ -386,7 +388,7 @@
 
   <!-- Navigation Tabs -->
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('tab-arch')">1. Architecture Diagram</button>
+    <button class="tab-btn active" onclick="switchTab('tab-arch')">1. Visual Architecture Diagram</button>
     <button class="tab-btn" onclick="switchTab('tab-thoughts')">2. Key Design Thoughts</button>
     <button class="tab-btn" onclick="switchTab('tab-expectations')">3. Expectations & Outcomes</button>
     <button class="tab-btn" onclick="switchTab('tab-model')">4. Working Operational Model</button>
@@ -400,77 +402,151 @@
       <div class="section-card">
         <div class="section-title">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          Enterprise HR & IT Agentic Mesh Architecture
+          System Architecture Vector Diagram
         </div>
         <div class="section-subtitle">
-          End-to-end multi-agent mesh combining Google Gemini 3.1 Pro, Policy RAG, SaaS MCP tools (WorkWeek & ServiceImmediately), Security Shield, and Human-in-the-Loop (HITL) governance.
+          Interactive SVG architecture diagram. <b>Click on any component box below</b> to inspect its technical design thoughts, expectations, outcomes, and speaker notes.
         </div>
 
-        <div class="arch-diagram-wrapper">
-          <!-- Layer 1: User & Interface Layer -->
-          <div class="arch-box" style="margin-bottom: 16px; background: #ffffff; border-color: #4285f4;">
-            <div class="box-header" style="color: #4285f4;">Layer 1: User Experience & Front-End Presentation</div>
-            <div class="box-title">Google Gemini Enterprise Web UI (`static/index.html` & `app.js`)</div>
-            <div class="box-desc">Glassmorphic floating input dock, persona switcher (`EMP1024` Aish Prabhat / `EMP2048` Jane Doe), real-time evaluation badge (`502 Tests Passed`), and interactive Human-in-the-Loop (HITL) card renderer.</div>
-          </div>
+        <div class="svg-arch-container">
+          <svg width="1100" height="820" viewBox="0 0 1100 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+            
+            <!-- Definitions for Gradients and Arrows -->
+            <defs>
+              <linearGradient id="grad-gemini" x1="0" y1="0" x2="1100" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4285F4"/>
+                <stop offset="50%" stop-color="#9B51E0"/>
+                <stop offset="100%" stop-color="#E91E63"/>
+              </linearGradient>
+              
+              <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#1A73E8" />
+              </marker>
 
-          <div class="flow-arrow">↓ REST / WebSocket API Request (`POST /api/chat`) ↓</div>
+              <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.06"/>
+              </filter>
+            </defs>
 
-          <!-- Layer 2: Security & Guardrails Layer -->
-          <div class="arch-box" style="margin-bottom: 16px; background: #fff8f6; border-color: #e91e63;">
-            <div class="box-header" style="color: #e91e63;">Layer 2: Zero-Trust Security & Compliance Shield</div>
-            <div class="box-title">Security Shield & Ethics Filter (`RootOrchestrator`)</div>
-            <div class="box-desc">Filters prompt injections & prompt leaks. Enforces strict compliance refusals: FCPA government bribery camouflage, personal/gift card non-reimbursement rules, and adult entertainment / Room Salon expense rejections.</div>
-          </div>
+            <!-- Background Canvas Mesh Groups -->
+            
+            <!-- LAYER 1: USER UI -->
+            <g class="arch-node" onclick="inspectNode('ui')">
+              <rect x="50" y="20" width="1000" height="90" rx="14" fill="#ffffff" stroke="#1A73E8" stroke-width="2" filter="url(#shadow)"/>
+              <rect x="50" y="20" width="1000" height="28" rx="14" fill="#E8F0FE"/>
+              <text x="70" y="39" font-family="Google Sans" font-size="12" font-weight="700" fill="#1A73E8">LAYER 1: USER EXPERIENCE & PRESENTATION (Google Gemini Web UI)</text>
+              <text x="70" y="72" font-family="Google Sans" font-size="16" font-weight="700" fill="#1F1F1F">Gemini 3.1 Pro Responsive Web Application (`index.html` / `app.js`)</text>
+              <text x="580" y="72" font-family="Inter" font-size="13" fill="#444746">Active Persona Switcher (Aish Prabhat / Jane Doe) • Interactive HITL Confirmation Card Deck</text>
+            </g>
 
-          <div class="flow-arrow">↓ Validated Clean Context Dispatch ↓</div>
+            <!-- Arrow 1 -->
+            <path d="M 550 110 L 550 142" stroke="#1A73E8" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <text x="560" y="132" font-family="JetBrains Mono" font-size="11" fill="#1A73E8" font-weight="600">POST /api/chat</text>
 
-          <!-- Layer 3: Root Orchestrator & Edge Engine -->
-          <div class="arch-box" style="margin-bottom: 16px; background: #f3f0fd; border-color: #9b51e0;">
-            <div class="box-header" style="color: #9b51e0;">Layer 3: Orchestration & Few-Shot Trajectory Dispatcher</div>
-            <div class="box-title">Root Orchestrator (`agents/root_orchestrator.py`)</div>
-            <div class="box-desc">Classifies intent and routes prompts across specialized sub-agents. Houses 10 Policy Gotcha Few-Shot Trajectories (advance notice rules, 12h shift logging math, TOIL order of operations, ITSM state machine rules, and multi-action updates).</div>
-          </div>
+            <!-- LAYER 2: SECURITY SHIELD -->
+            <g class="arch-node" onclick="inspectNode('security')">
+              <rect x="50" y="150" width="1000" height="90" rx="14" fill="#FFF8F6" stroke="#E91E63" stroke-width="2" filter="url(#shadow)"/>
+              <rect x="50" y="150" width="1000" height="28" rx="14" fill="#FCE8E6"/>
+              <text x="70" y="169" font-family="Google Sans" font-size="12" font-weight="700" fill="#C5221F">LAYER 2: ZERO-TRUST SECURITY & ETHICS GUARDRAILS SHIELD</text>
+              <text x="70" y="202" font-family="Google Sans" font-size="16" font-weight="700" fill="#1F1F1F">Active Security Shield & Compliance Evaluator</text>
+              <text x="500" y="202" font-family="Inter" font-size="13" fill="#444746">Prompt Injection/Leak Protection • FCPA Government Bribery Refusal • Adult Venue & Gift Card Block</text>
+            </g>
 
-          <div class="flow-arrow">↓ Dynamic Sub-Agent Delegation ↓</div>
+            <!-- Arrow 2 -->
+            <path d="M 550 240 L 550 272" stroke="#1A73E8" stroke-width="2.5" marker-end="url(#arrow)"/>
+            <text x="560" y="262" font-family="JetBrains Mono" font-size="11" fill="#1A73E8" font-weight="600">Clean Context</text>
 
-          <!-- Layer 4: Specialized Sub-Agent Mesh -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
-            <div class="arch-box" style="border-top: 4px solid #1a73e8;">
-              <div class="box-header" style="color: #1a73e8;">Sub-Agent A</div>
-              <div class="box-title">PolicyQAAgent</div>
-              <div class="box-desc">RAG engine searching 2026 Altostrat Handbooks (Leave, Equipment, Travel). Generates strict URL citations (`file:///...#L10`).</div>
+            <!-- LAYER 3: ROOT ORCHESTRATOR -->
+            <g class="arch-node" onclick="inspectNode('orchestrator')">
+              <rect x="50" y="280" width="1000" height="110" rx="14" fill="#F3F0FD" stroke="#9B51E0" stroke-width="2" filter="url(#shadow)"/>
+              <rect x="50" y="280" width="1000" height="28" rx="14" fill="#F0E8FE"/>
+              <text x="70" y="299" font-family="Google Sans" font-size="12" font-weight="700" fill="#9B51E0">LAYER 3: ROOT ORCHESTRATION & FEW-SHOT TRAJECTORY DISPATCHER</text>
+              <text x="70" y="332" font-family="Google Sans" font-size="16" font-weight="700" fill="#1F1F1F">RootOrchestrator (`agents/root_orchestrator.py`)</text>
+              <text x="70" y="362" font-family="Inter" font-size="13" fill="#444746">Intent Classifier & 10 Policy Gotcha Few-Shot Trajectories (12h Shift Math, Advance Notice Rules, TOIL Order, ITSM Jumps)</text>
+            </g>
+
+            <!-- Fan-out Arrows 3 -->
+            <path d="M 230 390 L 230 432" stroke="#1A73E8" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 550 390 L 550 432" stroke="#34A853" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 870 390 L 870 432" stroke="#FBBC04" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <!-- LAYER 4: SPECIALIZED SUB-AGENT MESH -->
+            <!-- Agent A -->
+            <g class="arch-node" onclick="inspectNode('policy')">
+              <rect x="50" y="440" width="310" height="140" rx="14" fill="#ffffff" stroke="#1A73E8" stroke-width="2" filter="url(#shadow)"/>
+              <rect x="50" y="440" width="310" height="28" rx="14" fill="#E8F0FE"/>
+              <text x="65" y="459" font-family="Google Sans" font-size="12" font-weight="700" fill="#1A73E8">SUB-AGENT A</text>
+              <text x="65" y="490" font-family="Google Sans" font-size="16" font-weight="700" fill="#1F1F1F">PolicyQAAgent</text>
+              <text x="65" y="515" font-family="Inter" font-size="12" fill="#444746">RAG Policy Vector Engine</text>
+              <text x="65" y="535" font-family="Inter" font-size="12" fill="#444746">2026 Altostrat Handbooks</text>
+              <text x="65" y="555" font-family="JetBrains Mono" font-size="11" fill="#1A73E8">Citation: file://...#L10</text>
+            </g>
+
+            <!-- Agent B -->
+            <g class="arch-node" onclick="inspectNode('workweek')">
+              <rect x="395" y="440" width="310" height="140" rx="14" fill="#ffffff" stroke="#34A853" stroke-width="2" filter="url(#shadow)"/>
+              <rect x="395" y="440" width="310" height="28" rx="14" fill="#E6F4EA"/>
+              <text x="410" y="459" font-family="Google Sans" font-size="12" font-weight="700" fill="#137333">SUB-AGENT B</text>
+              <text x="410" y="490" font-family="Google Sans" font-size="16" font-weight="700" fill="#1F1F1F">WorkWeekAgent</text>
+              <text x="410" y="515" font-family="Inter" font-size="12" fill="#444746">HRMS SaaS Integration</text>
+              <text x="410" y="535" font-family="Inter" font-size="12" fill="#444746">Real-Time Balances & Bookings</text>
+              <text x="410" y="555" font-family="JetBrains Mono" font-size="11" fill="#137333">MCP: workweek_mcp_server</text>
+            </g>
+
+            <!-- Agent C -->
+            <g class="arch-node" onclick="inspectNode('itsm')">
+              <rect x="740" y="440" width="310" height="140" rx="14" fill="#ffffff" stroke="#FBBC04" stroke-width="2" filter="url(#shadow)"/>
+              <rect x="740" y="440" width="310" height="28" rx="14" fill="#FEF7E0"/>
+              <text x="755" y="459" font-family="Google Sans" font-size="12" font-weight="700" fill="#B06000">SUB-AGENT C</text>
+              <text x="755" y="490" font-family="Google Sans" font-size="16" font-weight="700" fill="#1F1F1F">ServiceImmediatelyAgent</text>
+              <text x="755" y="515" font-family="Inter" font-size="12" fill="#444746">ITSM Hardware & Procurement</text>
+              <text x="755" y="535" font-family="Inter" font-size="12" fill="#444746">SLA Response & State Machine</text>
+              <text x="755" y="555" font-family="JetBrains Mono" font-size="11" fill="#B06000">MCP: itsm_mcp_server</text>
+            </g>
+
+            <!-- Fan-in Arrows 4 -->
+            <path d="M 205 580 L 520 618" stroke="#1A73E8" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 550 580 L 550 618" stroke="#34A853" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 895 580 L 580 618" stroke="#FBBC04" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <!-- LAYER 5: GROUNDING & HITL GATE -->
+            <g class="arch-node" onclick="inspectNode('hitl')">
+              <rect x="50" y="625" width="1000" height="85" rx="14" fill="#E6F4EA" stroke="#137333" stroke-width="2" filter="url(#shadow)"/>
+              <rect x="50" y="625" width="1000" height="28" rx="14" fill="#CEEAD6"/>
+              <text x="70" y="644" font-family="Google Sans" font-size="12" font-weight="700" fill="#137333">LAYER 5: GROUNDING EVALUATION & HUMAN-IN-THE-LOOP (HITL) GOVERNANCE GATE</text>
+              <text x="70" y="677" font-family="Google Sans" font-size="16" font-weight="700" fill="#1F1F1F">Grounding Evaluator (&ge;0.85 Threshold) & HITL Card Generator</text>
+              <text x="620" y="677" font-family="Inter" font-size="13" fill="#444746">State Mutations Paused for Interactive User Sign-Off</text>
+            </g>
+
+            <!-- LAYER 6: FOUNDATION MODEL -->
+            <g class="arch-node" onclick="inspectNode('foundation')">
+              <rect x="50" y="730" width="1000" height="65" rx="14" fill="url(#grad-gemini)" filter="url(#shadow)"/>
+              <text x="550" y="760" font-family="Google Sans" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">FOUNDATION ENGINE: Google Gemini 3.1 Pro LLM</text>
+              <text x="550" y="780" font-family="Inter" font-size="13" fill="#ffffff" text-anchor="middle" opacity="0.9">Multi-Turn Reasoning • Tool Calling • High-Precision Intent Understanding</text>
+            </g>
+
+          </svg>
+        </div>
+
+        <!-- Node Inspector Details Box -->
+        <div id="inspectorPanel" class="inspector-panel">
+          <div id="inspectorTitle" class="inspector-title">Component Inspector</div>
+          <div class="inspector-grid">
+            <div class="inspector-box">
+              <div class="inspector-lbl">Design Purpose</div>
+              <div id="inspectorPurpose" class="inspector-val">-</div>
             </div>
-            <div class="arch-box" style="border-top: 4px solid #34a853;">
-              <div class="box-header" style="color: #34a853;">Sub-Agent B</div>
-              <div class="box-title">WorkWeekAgent</div>
-              <div class="box-desc">HRMS SaaS integration via MCP. Fetches profile data, checks live balances, books vacation/sick leave, and updates addresses.</div>
+            <div class="inspector-box">
+              <div class="inspector-lbl">Expectations & Safeguards</div>
+              <div id="inspectorExpectations" class="inspector-val">-</div>
             </div>
-            <div class="arch-box" style="border-top: 4px solid #fbbc04;">
-              <div class="box-header" style="color: #fbbc04;">Sub-Agent C</div>
-              <div class="box-title">ServiceImmediatelyAgent</div>
-              <div class="box-desc">ITSM SaaS integration via MCP. Procures hardware, calculates SLA resolution windows, and enforces ticket state machine (`New` → `In Progress` → `Resolved`).</div>
+            <div class="inspector-box">
+              <div class="inspector-lbl">Measured Outcome</div>
+              <div id="inspectorOutcomes" class="inspector-val">-</div>
             </div>
-          </div>
-
-          <div class="flow-arrow">↓ Structured Action Proposal / Grounding Evaluation ↓</div>
-
-          <!-- Layer 5: Grounding & Governance Layer -->
-          <div class="arch-box" style="margin-bottom: 16px; background: #eaf3ea; border-color: #137333;">
-            <div class="box-header" style="color: #137333;">Layer 5: Grounding Evaluator & HITL Decision Gate</div>
-            <div class="box-title">Grounding Score Evaluator & HITL Card Engine</div>
-            <div class="box-desc">Evaluates policy grounding score ($\ge 0.85$). If the action modifies state (leave booking, address change, P1-P4 ticket creation), generates a `HITL_REQUIRED` card for explicit employee confirmation before execution.</div>
-          </div>
-
-          <div class="flow-arrow">↓ Final Grounded Response / Executed Action ↓</div>
-
-          <!-- Layer 6: Foundation Model -->
-          <div class="arch-box" style="background: var(--gemini-gradient-soft); border-color: #4285f4; text-align: center;">
-            <div class="box-header" style="color: #1a73e8; justify-content: center;">Foundation AI Model</div>
-            <div class="box-title">Google Gemini 3.1 Pro LLM Engine</div>
-            <div class="box-desc">Provides multi-turn reasoning, structured JSON tool calling, and high-precision intent understanding.</div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -553,8 +629,9 @@
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-          <div class="arch-box" style="border-left: 4px solid var(--warning-amber);">
-            <div class="box-header" style="color: var(--warning-amber);">Initial Enterprise Expectations</div>
+          <div class="thought-card" style="border-left-color: var(--warning-amber);">
+            <div class="thought-num" style="color: var(--warning-amber);">INITIAL EXPECTATIONS</div>
+            <div class="thought-title">Enterprise Requirements</div>
             <ul style="margin-left: 18px; font-size: 14px; color: var(--text-muted); line-height: 1.8;">
               <li>Provide instant 24/7 conversational HR & IT support.</li>
               <li>Eliminate manual ticket triaging and repetitive policy questions.</li>
@@ -564,8 +641,9 @@
             </ul>
           </div>
 
-          <div class="arch-box" style="border-left: 4px solid var(--success-green);">
-            <div class="box-header" style="color: var(--success-green);">Measured Benchmark Outcomes</div>
+          <div class="thought-card green">
+            <div class="thought-num" style="color: var(--success-green);">MEASURED OUTCOMES</div>
+            <div class="thought-title">Production Validation</div>
             <ul style="margin-left: 18px; font-size: 14px; color: var(--text-muted); line-height: 1.8;">
               <li><strong>100% Pass Rate</strong> across 502 golden evaluation test cases.</li>
               <li><strong>100% Grounding Accuracy</strong> with explicit policy document anchor URLs.</li>
@@ -588,33 +666,33 @@
         <div class="section-subtitle">How a user request traverses through the Altostrat Agentic Mesh in real time.</div>
 
         <div style="display: flex; flex-direction: column; gap: 16px;">
-          <div class="arch-box" style="border-left: 4px solid #4285f4;">
-            <div class="box-header" style="color: #4285f4;">STEP 1: Request Ingestion & Active Persona Resolution</div>
-            <div class="box-title">User Prompt & Context Initialization</div>
-            <div class="box-desc">The user submits a prompt via the Gemini Web UI (e.g. <i>"I have an issue with my laptop, can you raise a P1 ticket and check SLA?"</i>). The system resolves the active employee persona (`EMP1024` Aish Prabhat) and attaches session history.</div>
+          <div class="thought-card" style="border-left-color: #4285f4;">
+            <div class="thought-num">STEP 01</div>
+            <div class="thought-title">Request Ingestion & Persona Context Initialization</div>
+            <div class="box-desc">The user submits a prompt via the Gemini Web UI (e.g. <i>"I have an issue with my laptop, can you raise a P1 ticket and check SLA?"</i>). The system resolves the active employee persona (`EMP1024` Aish Prabhat) and attaches session context.</div>
           </div>
 
-          <div class="arch-box" style="border-left: 4px solid #e91e63;">
-            <div class="box-header" style="color: #e91e63;">STEP 2: Security & Ethics Shield Evaluation</div>
-            <div class="box-title">Zero-Trust Threat & Compliance Check</div>
+          <div class="thought-card pink">
+            <div class="thought-num">STEP 02</div>
+            <div class="thought-title">Security Shield & Ethics Evaluation</div>
             <div class="box-desc">The `RootOrchestrator` runs the prompt through the Security Shield. If prompt injection, prompt leak, or illegal expense requests (bribery, gift cards, adult venues) are detected, an immediate grounded refusal is returned without hitting sub-agent tools.</div>
           </div>
 
-          <div class="arch-box" style="border-left: 4px solid #9b51e0;">
-            <div class="box-header" style="color: #9b51e0;">STEP 3: Intent Classification & Trajectory Matching</div>
-            <div class="box-title">Agent Dispatch & Gotcha Trajectory Evaluation</div>
+          <div class="thought-card purple">
+            <div class="thought-num">STEP 03</div>
+            <div class="thought-title">Intent Classification & Trajectory Matching</div>
             <div class="box-desc">The prompt is evaluated against 10 specialized Policy Gotcha Trajectories. The orchestrator delegates execution to the appropriate sub-agent (`ServiceImmediatelyAgent` for IT issues, `WorkWeekAgent` for leave/profile, `PolicyQAAgent` for handbooks).</div>
           </div>
 
-          <div class="arch-box" style="border-left: 4px solid #34a853;">
-            <div class="box-header" style="color: #34a853;">STEP 4: SaaS MCP Tool Execution & SLA Calculation</div>
-            <div class="box-title">Sub-Agent API Invocation</div>
+          <div class="thought-card green">
+            <div class="thought-num">STEP 04</div>
+            <div class="thought-title">SaaS MCP Tool Execution & SLA Calculation</div>
             <div class="box-desc">The sub-agent executes necessary SaaS MCP tools (e.g., querying WorkWeek for leave balances or calculating ServiceImmediately SLA response time: P1 = 15 mins response, 2-hour resolution window).</div>
           </div>
 
-          <div class="arch-box" style="border-left: 4px solid #fbbc04;">
-            <div class="box-header" style="color: #fbbc04;">STEP 5: HITL Card Generation / Grounded Response Output</div>
-            <div class="box-title">Human-in-the-Loop Confirmation Gate</div>
+          <div class="thought-card">
+            <div class="thought-num">STEP 05</div>
+            <div class="thought-title">HITL Card Generation / Grounded Response Output</div>
             <div class="box-desc">If the action modifies state, the system renders an interactive `HITL_REQUIRED` confirmation card on the front-end with action parameters (`Priority: 1 - Critical`, `Category: Hardware`). Upon user clicking "Confirm & Submit", the mutation is executed safely.</div>
           </div>
         </div>
@@ -631,9 +709,9 @@
         <div class="section-subtitle">Slide-by-slide speaker notes and presentation script for presenting to large enterprise audiences.</div>
 
         <!-- Slide 1 -->
-        <div class="arch-box" style="margin-bottom: 20px;">
-          <div class="box-header" style="color: var(--gemini-blue);">SLIDE 1: Executive Pitch - The Enterprise HR & IT Challenge</div>
-          <div class="box-title">"Moving Beyond Simple Chatbots to Autonomous Agentic Meshes"</div>
+        <div class="thought-card" style="margin-bottom: 20px;">
+          <div class="thought-num">SLIDE 1</div>
+          <div class="thought-title">Executive Pitch - The Enterprise HR & IT Challenge</div>
           <div class="script-box">
             <div class="speaker-note">🗣️ SPEAKER SCRIPT</div>
             "Welcome everyone to the Elevate Workshop! Today, every enterprise is trying to deploy AI for internal workforce support. But traditional LLM chatbots fail in production because of three key flaws: <strong>hallucinating company policies</strong>, <strong>inability to handle complex shift math and policy edge cases</strong>, and <strong>lack of governance when taking actions in SaaS systems</strong>.<br><br>
@@ -642,9 +720,9 @@
         </div>
 
         <!-- Slide 2 -->
-        <div class="arch-box" style="margin-bottom: 20px;">
-          <div class="box-header" style="color: var(--gemini-purple);">SLIDE 2: Architectural Innovation - Multi-Agent Specialization</div>
-          <div class="box-title">"Decomposing Monolith Prompts into Specialized Agents"</div>
+        <div class="thought-card purple" style="margin-bottom: 20px;">
+          <div class="thought-num">SLIDE 2</div>
+          <div class="thought-title">Architectural Innovation - Multi-Agent Specialization</div>
           <div class="script-box">
             <div class="speaker-note">🗣️ SPEAKER SCRIPT</div>
             "Instead of asking a single prompt to do everything, our architecture uses a <strong>Root Orchestrator</strong> that routes intent to three dedicated sub-agents:<br>
@@ -656,9 +734,9 @@
         </div>
 
         <!-- Slide 3 -->
-        <div class="arch-box" style="margin-bottom: 20px;">
-          <div class="box-header" style="color: var(--gemini-pink);">SLIDE 3: Solving Policy Gotchas & Complex Edge Cases</div>
-          <div class="box-title">"100% Accuracy on Complex Policy Math and Edge Cases"</div>
+        <div class="thought-card pink" style="margin-bottom: 20px;">
+          <div class="thought-num">SLIDE 3</div>
+          <div class="thought-title">Solving Policy Gotchas & Complex Edge Cases</div>
           <div class="script-box">
             <div class="speaker-note">🗣️ SPEAKER SCRIPT</div>
             "In enterprise HR, edge cases make or break your system. For example:<br>
@@ -670,9 +748,9 @@
         </div>
 
         <!-- Slide 4 -->
-        <div class="arch-box" style="margin-bottom: 20px;">
-          <div class="box-header" style="color: var(--warning-amber);">SLIDE 4: Security, Ethics & Human-In-The-Loop Governance</div>
-          <div class="box-title">"Zero-Trust Compliance & Safe SaaS Mutation"</div>
+        <div class="thought-card" style="margin-bottom: 20px; border-left-color: var(--warning-amber);">
+          <div class="thought-num" style="color: var(--warning-amber);">SLIDE 4</div>
+          <div class="thought-title">Security, Ethics & Human-In-The-Loop Governance</div>
           <div class="script-box">
             <div class="speaker-note">🗣️ SPEAKER SCRIPT</div>
             "Security is non-negotiable. Our system features an active <strong>Security Shield</strong> that blocks prompt injections and enforces compliance rules:<br>
@@ -683,9 +761,9 @@
         </div>
 
         <!-- Slide 5 -->
-        <div class="arch-box">
-          <div class="box-header" style="color: var(--success-green);">SLIDE 5: Business Impact & Elevate Call to Action</div>
-          <div class="box-title">"Production-Ready Architecture Built on Google Cloud Argolis"</div>
+        <div class="thought-card green">
+          <div class="thought-num" style="color: var(--success-green);">SLIDE 5</div>
+          <div class="thought-title">Business Impact & Elevate Call to Action</div>
           <div class="script-box">
             <div class="speaker-note">🗣️ SPEAKER SCRIPT</div>
             "In summary, the Altostrat HR Agentic Mesh delivers:<br>
@@ -708,6 +786,71 @@
       
       event.target.classList.add('active');
       document.getElementById(tabId).classList.add('active');
+    }
+
+    const nodeDetails = {
+      ui: {
+        title: "Layer 1: User Experience & Presentation (Google Gemini Web UI)",
+        purpose: "Provides a responsive Google Gemini interface with persona switching and interactive HITL card rendering.",
+        expectations: "Must render instantly, allow employee persona selection, display evaluation status, and pause state mutations for HITL approval.",
+        outcomes: "100% responsive UI built with Gemini 3.1 Pro branding, cache-busting assets, and instant card rendering."
+      },
+      security: {
+        title: "Layer 2: Zero-Trust Security & Compliance Shield",
+        purpose: "Evaluates incoming prompts for prompt injections, system leaks, and compliance violations.",
+        expectations: "Must block FCPA government bribery camouflage, personal/gift card claims, and adult venue expenses.",
+        outcomes: "100% block rate across all security threat and illegal expense test cases."
+      },
+      orchestrator: {
+        title: "Layer 3: Root Orchestrator & Few-Shot Trajectory Dispatcher",
+        purpose: "Classifies intent and routes prompts across specialized sub-agents while enforcing 10 Policy Gotchas.",
+        expectations: "Must handle 12h shift math, advance notice rules, TOIL order of operations, and multi-action prompts.",
+        outcomes: "10/10 Policy Gotcha suite resolution with 100% routing accuracy."
+      },
+      policy: {
+        title: "Sub-Agent A: PolicyQAAgent",
+        purpose: "Executes RAG vector search over official 2026 Altostrat Policy Handbooks.",
+        expectations: "Must return accurate policy answers grounded with exact file line anchor citations.",
+        outcomes: "0% hallucination rate with 100% citation grounding precision."
+      },
+      workweek: {
+        title: "Sub-Agent B: WorkWeekAgent",
+        purpose: "Integrates with WorkWeek HRMS SaaS API via MCP for profile data and leave management.",
+        expectations: "Must validate balances, calculate shift hours, book leave, and update profile addresses.",
+        outcomes: "Seamless real-time execution of leave bookings and profile updates."
+      },
+      itsm: {
+        title: "Sub-Agent C: ServiceImmediatelyAgent",
+        purpose: "Integrates with ServiceImmediately ITSM SaaS API via MCP for hardware and ticket lifecycle.",
+        expectations: "Must calculate SLA response windows, downgrade invalid P1s, and enforce ticket state machine.",
+        outcomes: "Instant SLA calculations and strict ticket status transition enforcement."
+      },
+      hitl: {
+        title: "Layer 5: Grounding Evaluation & HITL Governance Gate",
+        purpose: "Evaluates policy grounding score (>= 0.85) and pauses state-mutating actions for employee approval.",
+        expectations: "Must prevent unapproved data mutations in WorkWeek and ServiceImmediately.",
+        outcomes: "Zero unauthorized SaaS mutations."
+      },
+      foundation: {
+        title: "Foundation AI Engine: Google Gemini 3.1 Pro",
+        purpose: "Powers deep multi-turn reasoning, intent classification, and structured tool calling.",
+        expectations: "Must deliver ultra-fast response generation with high precision.",
+        outcomes: "Optimal enterprise performance across all 502 benchmark cases."
+      }
+    };
+
+    function inspectNode(nodeKey) {
+      const details = nodeDetails[nodeKey];
+      if (!details) return;
+
+      document.getElementById('inspectorTitle').textContent = details.title;
+      document.getElementById('inspectorPurpose').textContent = details.purpose;
+      document.getElementById('inspectorExpectations').textContent = details.expectations;
+      document.getElementById('inspectorOutcomes').textContent = details.outcomes;
+
+      const panel = document.getElementById('inspectorPanel');
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   </script>
 </body>
