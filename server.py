@@ -96,6 +96,14 @@ async def serve_presentation():
         return FileResponse(pres_file)
     raise HTTPException(status_code=404, detail="Presentation file not found.")
 
+@app.get("/showcase")
+@app.get("/genai")
+async def serve_showcase():
+    showcase_file = os.path.join(os.path.dirname(__file__), "genai_chat_showcase.html")
+    if os.path.exists(showcase_file):
+        return FileResponse(showcase_file)
+    raise HTTPException(status_code=404, detail="Showcase file not found.")
+
 if __name__ == "__main__":
     import uvicorn
     logger.info("Starting FastAPI Web UI server on http://0.0.0.0:8000")
